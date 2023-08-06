@@ -87,7 +87,7 @@ interface MerchantReviewFacadeInterface
      *
      * @param array<int> $merchantReviewIds
      *
-     * @return mixed
+     * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviewsByIds(array $merchantReviewIds);
+    public function getMerchantReviewsByIds(array $merchantReviewIds): MerchantReviewCollectionTransfer;
 }
