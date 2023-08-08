@@ -16,10 +16,8 @@
     </transfer>
 
     <transfer name="MerchantReviewCriteria">
-        <property name="idMerchantReview" type="int"/>
-        <property name="fkMerchant" type="int"/>
+        <property name="merchantReviewIds" type="int[]"/>
         <property name="filter" type="Filter"/>
-        <property name="pagination" type="Pagination"/>
     </transfer>
 
     <transfer name="Filter">
@@ -29,21 +27,8 @@
         <property name="orderDirection" type="string"/>
     </transfer>
 
-    <transfer name="Pagination">
-        <property name="page" type="int"/>
-        <property name="maxPerPage" type="int"/>
-        <property name="nbResults" type="int"/>
-        <property name="previousPage" type="int"/>
-        <property name="nextPage" type="int"/>
-        <property name="firstIndex" type="int"/>
-        <property name="lastIndex" type="int"/>
-        <property name="firstPage" type="int"/>
-        <property name="lastPage" type="int"/>
-    </transfer>
-
-
     <transfer name="MerchantReviewCollection">
-        <property name="reviews" type="MerchantReview[]" singular="review"/>
+        <property name="merchantReviews" type="MerchantReview[]" singular="merchantReview"/>
         <property name="pagination" type="Pagination"/>
     </transfer>
 
@@ -72,6 +57,10 @@
         <property name="averageRating" type="float"/>
         <property name="totalReview" type="int"/>
         <property name="ratingAggregation" type="array" singular="ratingAggregation"/>
+    </transfer>
+
+    <transfer name="RatingAggregation">
+        <property name="ratingAggregation" type="int[]" singular="ratingAggregation"/>
     </transfer>
 
 </transfers>

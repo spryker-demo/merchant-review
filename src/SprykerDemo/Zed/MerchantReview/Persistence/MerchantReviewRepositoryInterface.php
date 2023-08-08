@@ -8,6 +8,7 @@
 namespace SprykerDemo\Zed\MerchantReview\Persistence;
 
 use Generated\Shared\Transfer\MerchantReviewCollectionTransfer;
+use Generated\Shared\Transfer\MerchantReviewCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 
 /**
@@ -23,9 +24,11 @@ interface MerchantReviewRepositoryInterface
     public function findMerchantReviewById(int $idMerchantReview): ?MerchantReviewTransfer;
 
     /**
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
+     *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviews(): MerchantReviewCollectionTransfer;
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer;
 
     /**
      * @param array<int> $merchantReviewIds

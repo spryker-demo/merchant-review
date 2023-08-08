@@ -9,7 +9,7 @@ namespace SprykerDemo\Service\MerchantReview\Calculator;
 
 use Generated\Shared\Transfer\MerchantReviewSummaryTransfer;
 use Generated\Shared\Transfer\RatingAggregationTransfer;
-use SprykerDemo\Service\MerchantReview\MerchantReviewConfig;
+use SprykerDemo\Shared\MerchantReview\MerchantReviewConfig;
 
 class MerchantReviewSummaryCalculator
 {
@@ -22,19 +22,6 @@ class MerchantReviewSummaryCalculator
      * @var int
      */
     public const RATING_PRECISION = 1;
-
-    /**
-     * @var \SprykerDemo\Service\MerchantReview\MerchantReviewConfig
-     */
-    protected MerchantReviewConfig $merchantReviewConfig;
-
-    /**
-     * @param \SprykerDemo\Service\MerchantReview\MerchantReviewConfig $merchantReviewConfig
-     */
-    public function __construct(MerchantReviewConfig $merchantReviewConfig)
-    {
-        $this->merchantReviewConfig = $merchantReviewConfig;
-    }
 
     /**
      * @param \Generated\Shared\Transfer\RatingAggregationTransfer $ratingAggregationTransfer
@@ -50,7 +37,7 @@ class MerchantReviewSummaryCalculator
 
         return (new MerchantReviewSummaryTransfer())
             ->setRatingAggregation($this->formatRatingAggregation($ratingAggregation))
-            ->setMaximumRating($this->merchantReviewConfig->getMaximumRating())
+            ->setMaximumRating(MerchantReviewConfig::MERCHANT_REVIEW_MAXIMUM_RATING)
             ->setAverageRating($this->getAverageRating($ratingAggregation, $totalReview))
             ->setTotalReview($totalReview);
     }
@@ -92,10 +79,8 @@ class MerchantReviewSummaryCalculator
      */
     protected function fillRatings(array $ratingAggregation): array
     {
-        $maximumRating = $this->merchantReviewConfig->getMaximumRating();
-
-        for ($rating = static::MINIMUM_RATING; $rating <= $maximumRating; $rating++) {
-            $ratingAggregation[$rating] = array_key_exists($rating, $ratingAggregation) ? $ratingAggregation[$rating] : 0;
+        for ($rating = static::MINIMUM_RATING; $rating <= MerchantReviewConfig::MERCHANT_REVIEW_MAXIMUM_RATING; $rating++) {
+            $ratingAggregation[$rating] = $ratingAggregation[$rating] ?? 0;
         }
 
         return $ratingAggregation;

@@ -31,18 +31,4 @@ class MerchantReviewClient extends AbstractClient implements MerchantReviewClien
             ->createMerchantReviewStub()
             ->submitCustomerReview($merchantReviewRequestTransfer);
     }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @return int
-     */
-    public function getMaximumRating(): int
-    {
-        return $this->getFactory()
-            ->getConfig()
-            ->getMaximumRating();
-    }
 }

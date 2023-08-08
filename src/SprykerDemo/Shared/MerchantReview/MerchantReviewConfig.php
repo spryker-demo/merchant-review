@@ -22,6 +22,11 @@ class MerchantReviewConfig extends AbstractBundleConfig
     public const ELASTICSEARCH_INDEX_TYPE_NAME = 'merchant-review';
 
     /**
+     * @var int
+     */
+    public const MERCHANT_REVIEW_MAXIMUM_RATING = 5;
+
+    /**
      * Specification:
      * - Retrieves the available maximum rating value
      *
@@ -31,6 +36,6 @@ class MerchantReviewConfig extends AbstractBundleConfig
      */
     public function getMaximumRating(): int
     {
-        return 5;
+        return static::MERCHANT_REVIEW_MAXIMUM_RATING;
     }
 }

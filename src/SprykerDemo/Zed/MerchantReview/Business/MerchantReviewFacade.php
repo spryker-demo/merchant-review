@@ -8,6 +8,7 @@
 namespace SprykerDemo\Zed\MerchantReview\Business;
 
 use Generated\Shared\Transfer\MerchantReviewCollectionTransfer;
+use Generated\Shared\Transfer\MerchantReviewCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -84,24 +85,12 @@ class MerchantReviewFacade extends AbstractFacade implements MerchantReviewFacad
      *
      * @api
      *
-     * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
-     */
-    public function getMerchantReviews(): MerchantReviewCollectionTransfer
-    {
-        return $this->getRepository()->getMerchantReviews();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param array<int> $merchantReviewIds
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
      *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviewsByIds(array $merchantReviewIds): MerchantReviewCollectionTransfer
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer
     {
-        return $this->getRepository()->getMerchantReviewsByIds($merchantReviewIds);
+        return $this->getRepository()->getMerchantReviews($merchantReviewCriteria);
     }
 }

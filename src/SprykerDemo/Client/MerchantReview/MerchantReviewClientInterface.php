@@ -24,14 +24,4 @@ interface MerchantReviewClientInterface
      * @return \Generated\Shared\Transfer\MerchantReviewResponseTransfer
      */
     public function submitCustomerReview(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): MerchantReviewResponseTransfer;
-
-    /**
-     * Specification:
-     * - Returns the maximum rating value for merchant review.
-     *
-     * @api
-     *
-     * @return int
-     */
-    public function getMaximumRating(): int;
 }

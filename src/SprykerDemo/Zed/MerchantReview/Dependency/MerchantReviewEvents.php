@@ -11,26 +11,6 @@ interface MerchantReviewEvents
 {
     /**
      * Specification
-     * - This events will be used for merchant_review_search publishing
-     *
-     * @api
-     *
-     * @var string
-     */
-    public const MERCHANT_REVIEW_SEARCH_PUBLISH = 'ProductReview.merchant_review_search.publish';
-
-    /**
-     * Specification
-     * - This events will be used for merchant_review_search un-publishing
-     *
-     * @api
-     *
-     * @var string
-     */
-    public const MERCHANT_REVIEW_SEARCH_UNPUBLISH = 'ProductReview.merchant_review_search.unpublish';
-
-    /**
-     * Specification
      * - This events will be used for spy_merchant_review publishing
      *
      * @api

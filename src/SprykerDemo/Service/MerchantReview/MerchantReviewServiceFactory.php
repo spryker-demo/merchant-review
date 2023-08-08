@@ -20,6 +20,6 @@ class MerchantReviewServiceFactory extends AbstractServiceFactory
      */
     public function createMerchantReviewSummaryCalculator(): MerchantReviewSummaryCalculator
     {
-        return new MerchantReviewSummaryCalculator($this->getConfig());
+        return new MerchantReviewSummaryCalculator();
     }
 }

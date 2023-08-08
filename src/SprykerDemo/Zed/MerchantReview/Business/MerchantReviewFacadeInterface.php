@@ -8,6 +8,7 @@
 namespace SprykerDemo\Zed\MerchantReview\Business;
 
 use Generated\Shared\Transfer\MerchantReviewCollectionTransfer;
+use Generated\Shared\Transfer\MerchantReviewCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 
 interface MerchantReviewFacadeInterface
@@ -71,23 +72,13 @@ interface MerchantReviewFacadeInterface
 
     /**
      * Specification:
-     * - Returns all available merchant reviews
+     * - Returns all available merchant reviews by `MerchantReviewCriteriaTransfer`.
      *
      * @api
      *
-     * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
-     */
-    public function getMerchantReviews(): MerchantReviewCollectionTransfer;
-
-    /**
-     * Specification:
-     * - Returns all available merchant reviews by provided ids
-     *
-     * @api
-     *
-     * @param array<int> $merchantReviewIds
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
      *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviewsByIds(array $merchantReviewIds): MerchantReviewCollectionTransfer;
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer;
 }

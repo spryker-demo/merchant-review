@@ -7,8 +7,11 @@
 
 namespace SprykerDemo\Zed\MerchantReview\Persistence;
 
+use Generated\Shared\Transfer\FilterTransfer;
 use Generated\Shared\Transfer\MerchantReviewCollectionTransfer;
+use Generated\Shared\Transfer\MerchantReviewCriteriaTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
+use Orm\Zed\MerchantReview\Persistence\SpyMerchantReviewQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -38,17 +41,26 @@ class MerchantReviewRepository extends AbstractRepository implements MerchantRev
     }
 
     /**
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
+     *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviews(): MerchantReviewCollectionTransfer
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer
     {
-        $merchantReviewEntities = $this->getFactory()
-            ->createMerchantReviewQuery()
-            ->find();
+        $merchantReviewQuery = $this->getFactory()
+            ->createMerchantReviewQuery();
+
+        if ($merchantReviewCriteria->getMerchantReviewIds()) {
+            $merchantReviewQuery->filterByIdMerchantReview_In($merchantReviewCriteria->getMerchantReviewIds());
+        }
+
+        if ($merchantReviewCriteria->getFilter()) {
+            $merchantReviewQuery = $this->applyFilter($merchantReviewCriteria->getFilter(), $merchantReviewQuery);
+        }
 
         return $this->getFactory()
             ->createMerchantReviewMapper()
-            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewEntities);
+            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewQuery->find());
     }
 
     /**
@@ -66,5 +78,28 @@ class MerchantReviewRepository extends AbstractRepository implements MerchantRev
         return $this->getFactory()
             ->createMerchantReviewMapper()
             ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewEntities);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
+     * @param \Orm\Zed\MerchantReview\Persistence\SpyMerchantReviewQuery $merchantReviewQuery
+     *
+     * @return \Orm\Zed\MerchantReview\Persistence\SpyMerchantReviewQuery
+     */
+    protected function applyFilter(FilterTransfer $filterTransfer, SpyMerchantReviewQuery $merchantReviewQuery): SpyMerchantReviewQuery
+    {
+        if ($filterTransfer->getLimit()) {
+            $merchantReviewQuery->limit($filterTransfer->getLimit());
+        }
+
+        if ($filterTransfer->getOffset()) {
+            $merchantReviewQuery->offset($filterTransfer->getOffset());
+        }
+
+        if ($filterTransfer->getOrderBy()) {
+            $merchantReviewQuery->orderBy($filterTransfer->getOrderBy(), $filterTransfer->getOrderDirection() ?? 'ASC');
+        }
+
+        return $merchantReviewQuery;
     }
 }
