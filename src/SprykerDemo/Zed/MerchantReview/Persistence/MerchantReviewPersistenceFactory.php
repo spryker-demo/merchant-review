@@ -7,6 +7,7 @@
 
 namespace SprykerDemo\Zed\MerchantReview\Persistence;
 
+use Orm\Zed\MerchantReview\Persistence\SpyMerchantReview;
 use Orm\Zed\MerchantReview\Persistence\SpyMerchantReviewQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 use SprykerDemo\Zed\MerchantReview\Persistence\Propel\Mapper\MerchantReviewMapper;
@@ -30,5 +31,13 @@ class MerchantReviewPersistenceFactory extends AbstractPersistenceFactory
     public function createMerchantReviewMapper(): MerchantReviewMapper
     {
         return new MerchantReviewMapper();
+    }
+
+    /**
+     * @return \Orm\Zed\MerchantReview\Persistence\SpyMerchantReview
+     */
+    public function createSpyMerchantReview(): SpyMerchantReview
+    {
+        return new SpyMerchantReview();
     }
 }

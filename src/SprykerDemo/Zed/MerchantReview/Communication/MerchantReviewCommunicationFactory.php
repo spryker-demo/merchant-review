@@ -11,6 +11,8 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 use SprykerDemo\Zed\MerchantReview\Communication\Controller\Mapper\CustomerReviewSubmitMapper;
 use SprykerDemo\Zed\MerchantReview\Communication\Controller\Mapper\CustomerReviewSubmitMapperInterface;
+use SprykerDemo\Zed\MerchantReview\Communication\Controller\Validator\MerchantReviewRequestValidator;
+use SprykerDemo\Zed\MerchantReview\Communication\Controller\Validator\MerchantReviewRequestValidatorInterface;
 use SprykerDemo\Zed\MerchantReview\MerchantReviewDependencyProvider;
 
 /**
@@ -25,6 +27,14 @@ class MerchantReviewCommunicationFactory extends AbstractCommunicationFactory
     public function createCustomerReviewSubmitMapper(): CustomerReviewSubmitMapperInterface
     {
         return new CustomerReviewSubmitMapper($this->getLocaleFacade());
+    }
+
+    /**
+     * @return \SprykerDemo\Zed\MerchantReview\Communication\Controller\Validator\MerchantReviewRequestValidatorInterface
+     */
+    public function createMerchantReviewRequestValidator(): MerchantReviewRequestValidatorInterface
+    {
+        return new MerchantReviewRequestValidator();
     }
 
     /**

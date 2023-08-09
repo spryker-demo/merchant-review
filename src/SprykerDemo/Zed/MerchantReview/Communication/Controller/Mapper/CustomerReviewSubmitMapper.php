@@ -33,43 +33,23 @@ class CustomerReviewSubmitMapper implements CustomerReviewSubmitMapperInterface
      */
     public function mapRequestTransfer(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): MerchantReviewTransfer
     {
-        $this->assertMerchantReviewRequestTransfer($merchantReviewRequestTransfer);
-
         $merchantReviewTransfer = new MerchantReviewTransfer();
 
         $merchantReviewTransfer
             ->fromArray($merchantReviewRequestTransfer->modifiedToArray(), true)
             ->setFkMerchant($merchantReviewRequestTransfer->getIdMerchant())
-            ->setFkLocale($this->getIdLocale($merchantReviewRequestTransfer));
+            ->setFkLocale($this->findIdLocale($merchantReviewRequestTransfer->getLocaleNameOrFail()));
 
         return $merchantReviewTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
+     * @param string $localeName
      *
      * @return int|null
      */
-    protected function getIdLocale(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): ?int
+    protected function findIdLocale(string $localeName): ?int
     {
-        $localeName = $merchantReviewRequestTransfer->getLocaleName();
-
-        if (!$localeName) {
-            return null;
-        }
-
         return $this->localeFacade->getLocale($localeName)->getIdLocale();
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
-     *
-     * @return void
-     */
-    protected function assertMerchantReviewRequestTransfer(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): void
-    {
-        $merchantReviewRequestTransfer
-            ->requireIdMerchant()
-            ->requireLocaleName();
     }
 }

@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\MerchantReviewSummaryTransfer;
 use Generated\Shared\Transfer\RatingAggregationTransfer;
 use SprykerDemo\Shared\MerchantReview\MerchantReviewConfig;
 
-class MerchantReviewSummaryCalculator
+class MerchantReviewSummaryCalculator implements MerchantReviewSummaryCalculatorInterface
 {
     /**
      * @var int

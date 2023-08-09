@@ -12,19 +12,24 @@ use Spryker\Shared\Kernel\AbstractBundleConfig;
 class MerchantReviewConfig extends AbstractBundleConfig
 {
     /**
-     * @var string
-     */
-    public const RESOURCE_TYPE_MERCHANT_REVIEW = 'merchant_review';
-
-    /**
-     * @var string
-     */
-    public const ELASTICSEARCH_INDEX_TYPE_NAME = 'merchant-review';
-
-    /**
+     * Specification:
+     * - Represents the available maximum rating value.
+     *
+     * @api
+     *
      * @var int
      */
     public const MERCHANT_REVIEW_MAXIMUM_RATING = 5;
+
+    /**
+     * Specification:
+     * - Represents the available minimum rating value.
+     *
+     * @api
+     *
+     * @var int
+     */
+    public const MERCHANT_REVIEW_MINIMUM_RATING = 1;
 
     /**
      * Specification:

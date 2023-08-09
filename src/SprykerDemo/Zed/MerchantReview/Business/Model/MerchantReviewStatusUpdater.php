@@ -12,6 +12,9 @@ use SprykerDemo\Zed\MerchantReview\Persistence\MerchantReviewEntityManagerInterf
 
 class MerchantReviewStatusUpdater implements MerchantReviewStatusUpdaterInterface
 {
+    /**
+     * @var \SprykerDemo\Zed\MerchantReview\Persistence\MerchantReviewEntityManagerInterface
+     */
     protected MerchantReviewEntityManagerInterface $merchantReviewEntityManager;
 
     /**

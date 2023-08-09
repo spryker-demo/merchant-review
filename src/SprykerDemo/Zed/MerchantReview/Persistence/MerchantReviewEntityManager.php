@@ -9,7 +9,6 @@ namespace SprykerDemo\Zed\MerchantReview\Persistence;
 
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 use Orm\Zed\MerchantReview\Persistence\Map\SpyMerchantReviewTableMap;
-use Orm\Zed\MerchantReview\Persistence\SpyMerchantReview;
 use Propel\Runtime\Exception\EntityNotFoundException;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -27,7 +26,7 @@ class MerchantReviewEntityManager extends AbstractEntityManager implements Merch
     {
         $merchantReviewEntity = $this->getFactory()
             ->createMerchantReviewMapper()
-            ->mapMerchantReviewTransferToMerchantReviewEntity($merchantReviewTransfer, new SpyMerchantReview());
+            ->mapMerchantReviewTransferToMerchantReviewEntity($merchantReviewTransfer, $this->getFactory()->createSpyMerchantReview());
         $merchantReviewEntity->setStatus(SpyMerchantReviewTableMap::COL_STATUS_PENDING);
         $merchantReviewEntity->save();
 

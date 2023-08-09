@@ -10,6 +10,7 @@ namespace SprykerDemo\Zed\MerchantReview\Communication\Controller;
 use Generated\Shared\Transfer\MerchantReviewErrorTransfer;
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
 use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
+use Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 use SprykerDemo\Shared\MerchantReview\Exception\RatingOutOfRangeException;
 
@@ -27,18 +28,22 @@ class GatewayController extends AbstractGatewayController
     public function submitCustomerReviewAction(
         MerchantReviewRequestTransfer $merchantReviewRequestTransfer
     ): MerchantReviewResponseTransfer {
-        $merchantReviewTransfer = $this->getFactory()
-            ->createCustomerReviewSubmitMapper()
-            ->mapRequestTransfer($merchantReviewRequestTransfer);
-
         try {
+            $this->getFactory()
+                ->createMerchantReviewRequestValidator()
+                ->validate($merchantReviewRequestTransfer);
+
+            $merchantReviewTransfer = $this->getFactory()
+                ->createCustomerReviewSubmitMapper()
+                ->mapRequestTransfer($merchantReviewRequestTransfer);
+
             $merchantReviewTransfer = $this->getFacade()
                 ->createMerchantReview($merchantReviewTransfer);
 
             return (new MerchantReviewResponseTransfer())
                 ->setIsSuccess(true)
                 ->setMerchantReview($merchantReviewTransfer);
-        } catch (RatingOutOfRangeException $exception) {
+        } catch (RatingOutOfRangeException | RequiredTransferPropertyException $exception) {
             return (new MerchantReviewResponseTransfer())
                 ->setIsSuccess(false)
                 ->addError((new MerchantReviewErrorTransfer())->setMessage($exception->getMessage()));
