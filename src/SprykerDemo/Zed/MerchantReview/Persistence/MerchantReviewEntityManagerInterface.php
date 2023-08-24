@@ -33,5 +33,5 @@ interface MerchantReviewEntityManagerInterface
      *
      * @return void
      */
-    public function updateMerchantReview(MerchantReviewTransfer $merchantReviewTransfer): void;
+    public function updateMerchantReviewStatus(MerchantReviewTransfer $merchantReviewTransfer): void;
 }

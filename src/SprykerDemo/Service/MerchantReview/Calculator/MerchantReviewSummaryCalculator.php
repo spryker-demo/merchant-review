@@ -16,12 +16,7 @@ class MerchantReviewSummaryCalculator implements MerchantReviewSummaryCalculator
     /**
      * @var int
      */
-    public const MINIMUM_RATING = 1;
-
-    /**
-     * @var int
-     */
-    public const RATING_PRECISION = 1;
+    protected const RATING_PRECISION = 1;
 
     /**
      * @param \Generated\Shared\Transfer\RatingAggregationTransfer $ratingAggregationTransfer
@@ -79,7 +74,7 @@ class MerchantReviewSummaryCalculator implements MerchantReviewSummaryCalculator
      */
     protected function fillRatings(array $ratingAggregation): array
     {
-        for ($rating = static::MINIMUM_RATING; $rating <= MerchantReviewConfig::MERCHANT_REVIEW_MAXIMUM_RATING; $rating++) {
+        for ($rating = MerchantReviewConfig::MERCHANT_REVIEW_MINIMUM_RATING; $rating <= MerchantReviewConfig::MERCHANT_REVIEW_MAXIMUM_RATING; $rating++) {
             $ratingAggregation[$rating] = $ratingAggregation[$rating] ?? 0;
         }
 

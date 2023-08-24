@@ -11,9 +11,6 @@ use Spryker\Service\Kernel\AbstractServiceFactory;
 use SprykerDemo\Service\MerchantReview\Calculator\MerchantReviewSummaryCalculator;
 use SprykerDemo\Service\MerchantReview\Calculator\MerchantReviewSummaryCalculatorInterface;
 
-/**
- * @method \SprykerDemo\Service\MerchantReview\MerchantReviewConfig getConfig()
- */
 class MerchantReviewServiceFactory extends AbstractServiceFactory
 {
     /**

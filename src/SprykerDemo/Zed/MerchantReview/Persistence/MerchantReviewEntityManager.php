@@ -56,20 +56,19 @@ class MerchantReviewEntityManager extends AbstractEntityManager implements Merch
      *
      * @return void
      */
-    public function updateMerchantReview(MerchantReviewTransfer $merchantReviewTransfer): void
+    public function updateMerchantReviewStatus(MerchantReviewTransfer $merchantReviewTransfer): void
     {
         $merchantReviewEntity = $this->getFactory()
             ->createMerchantReviewQuery()
-            ->filterByIdMerchantReview($merchantReviewTransfer->getIdMerchantReview())
+            ->filterByIdMerchantReview($merchantReviewTransfer->getIdMerchantReviewOrFail())
             ->findOne();
 
         if ($merchantReviewEntity === null) {
             throw new EntityNotFoundException('Merchant review entity not found');
         }
 
-        $this->getFactory()
-            ->createMerchantReviewMapper()
-            ->mapMerchantReviewTransferToMerchantReviewEntity($merchantReviewTransfer, $merchantReviewEntity);
+        $merchantReviewEntity->setStatus($merchantReviewTransfer->getStatusOrFail());
+
         $merchantReviewEntity->save();
     }
 }

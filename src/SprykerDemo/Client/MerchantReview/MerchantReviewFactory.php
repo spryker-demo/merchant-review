@@ -12,9 +12,6 @@ use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 use SprykerDemo\Client\MerchantReview\Zed\MerchantReviewStub;
 use SprykerDemo\Client\MerchantReview\Zed\MerchantReviewStubInterface;
 
-/**
- * @method \SprykerDemo\Client\MerchantReview\MerchantReviewConfig getConfig()
- */
 class MerchantReviewFactory extends AbstractFactory
 {
     /**

@@ -56,7 +56,7 @@
         <property name="maximumRating" type="int"/>
         <property name="averageRating" type="float"/>
         <property name="totalReview" type="int"/>
-        <property name="ratingAggregation" type="array" singular="ratingAggregation"/>
+        <property name="ratingAggregation" type="int[]" singular="ratingAggregation"/>
     </transfer>
 
     <transfer name="RatingAggregation">

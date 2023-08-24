@@ -8,31 +8,54 @@
 namespace SprykerDemo\Zed\MerchantReview\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use Spryker\Zed\Merchant\Business\MerchantFacadeInterface;
-use SprykerDemo\Zed\MerchantReview\Business\Model\MerchantReviewStatusUpdater;
-use SprykerDemo\Zed\MerchantReview\Business\Model\MerchantReviewStatusUpdaterInterface;
+use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
+use SprykerDemo\Zed\MerchantReview\Business\Creator\MerchantReviewCreator;
+use SprykerDemo\Zed\MerchantReview\Business\Creator\MerchantReviewCreatorInterface;
+use SprykerDemo\Zed\MerchantReview\Business\Mapper\MerchantReviewRequestMapper;
+use SprykerDemo\Zed\MerchantReview\Business\Mapper\MerchantReviewRequestMapperInterface;
+use SprykerDemo\Zed\MerchantReview\Business\Validator\MerchantReviewRequestValidator;
+use SprykerDemo\Zed\MerchantReview\Business\Validator\MerchantReviewRequestValidatorInterface;
 use SprykerDemo\Zed\MerchantReview\MerchantReviewDependencyProvider;
 
 /**
- * @method \SprykerDemo\Zed\MerchantReview\MerchantReviewConfig getConfig()
  * @method \SprykerDemo\Zed\MerchantReview\Persistence\MerchantReviewRepositoryInterface getRepository()
  * @method \SprykerDemo\Zed\MerchantReview\Persistence\MerchantReviewEntityManagerInterface getEntityManager()
  */
 class MerchantReviewBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \SprykerDemo\Zed\MerchantReview\Business\Model\MerchantReviewStatusUpdaterInterface
+     * @return \SprykerDemo\Zed\MerchantReview\Business\Validator\MerchantReviewRequestValidatorInterface
      */
-    public function createMerchantReviewStatusUpdater(): MerchantReviewStatusUpdaterInterface
+    public function createMerchantReviewRequestValidator(): MerchantReviewRequestValidatorInterface
     {
-        return new MerchantReviewStatusUpdater($this->getEntityManager());
+        return new MerchantReviewRequestValidator();
     }
 
     /**
-     * @return \Spryker\Zed\Merchant\Business\MerchantFacadeInterface
+     * @return \SprykerDemo\Zed\MerchantReview\Business\Mapper\MerchantReviewRequestMapperInterface
      */
-    protected function getMerchantFacade(): MerchantFacadeInterface
+    public function createMerchantReviewRequestMapper(): MerchantReviewRequestMapperInterface
     {
-        return $this->getProvidedDependency(MerchantReviewDependencyProvider::FACADE_MERCHANT);
+        return new MerchantReviewRequestMapper($this->getLocaleFacade());
+    }
+
+    /**
+     * @return \SprykerDemo\Zed\MerchantReview\Business\Creator\MerchantReviewCreatorInterface
+     */
+    public function createMerchantReviewCreator(): MerchantReviewCreatorInterface
+    {
+        return new MerchantReviewCreator(
+            $this->createMerchantReviewRequestValidator(),
+            $this->createMerchantReviewRequestMapper(),
+            $this->getEntityManager(),
+        );
+    }
+
+    /**
+     * @return \Spryker\Zed\Locale\Business\LocaleFacadeInterface
+     */
+    protected function getLocaleFacade(): LocaleFacadeInterface
+    {
+        return $this->getProvidedDependency(MerchantReviewDependencyProvider::FACADE_LOCALE);
     }
 }

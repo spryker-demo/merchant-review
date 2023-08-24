@@ -5,17 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerDemo\Zed\MerchantReview\Communication\Controller\Mapper;
+namespace SprykerDemo\Zed\MerchantReview\Business\Creator;
 
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
-use Generated\Shared\Transfer\MerchantReviewTransfer;
+use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
 
-interface CustomerReviewSubmitMapperInterface
+interface MerchantReviewCreatorInterface
 {
     /**
      * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\MerchantReviewTransfer
+     * @return \Generated\Shared\Transfer\MerchantReviewResponseTransfer
      */
-    public function mapRequestTransfer(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): MerchantReviewTransfer;
+    public function createMerchantReview(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): MerchantReviewResponseTransfer;
 }

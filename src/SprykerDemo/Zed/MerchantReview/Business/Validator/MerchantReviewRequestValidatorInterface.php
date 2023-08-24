@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerDemo\Zed\MerchantReview\Communication\Controller\Validator;
+namespace SprykerDemo\Zed\MerchantReview\Business\Validator;
 
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
 

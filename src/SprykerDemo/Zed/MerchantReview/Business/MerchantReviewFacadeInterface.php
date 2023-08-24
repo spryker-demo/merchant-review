@@ -9,6 +9,8 @@ namespace SprykerDemo\Zed\MerchantReview\Business;
 
 use Generated\Shared\Transfer\MerchantReviewCollectionTransfer;
 use Generated\Shared\Transfer\MerchantReviewCriteriaTransfer;
+use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
+use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 
 interface MerchantReviewFacadeInterface
@@ -21,13 +23,13 @@ interface MerchantReviewFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\MerchantReviewTransfer $merchantReviewTransfer
+     * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\MerchantReviewTransfer
+     * @return \Generated\Shared\Transfer\MerchantReviewResponseTransfer
      */
     public function createMerchantReview(
-        MerchantReviewTransfer $merchantReviewTransfer
-    ): MerchantReviewTransfer;
+        MerchantReviewRequestTransfer $merchantReviewRequestTransfer
+    ): MerchantReviewResponseTransfer;
 
     /**
      * Specification:

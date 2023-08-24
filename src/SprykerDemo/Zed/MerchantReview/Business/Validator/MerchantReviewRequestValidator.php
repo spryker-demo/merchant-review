@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerDemo\Zed\MerchantReview\Communication\Controller\Validator;
+namespace SprykerDemo\Zed\MerchantReview\Business\Validator;
 
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
 use SprykerDemo\Shared\MerchantReview\Exception\RatingOutOfRangeException;
@@ -22,9 +22,6 @@ class MerchantReviewRequestValidator implements MerchantReviewRequestValidatorIn
      */
     public function validate(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): void
     {
-        $merchantReviewRequestTransfer->requireIdMerchant()
-            ->requireLocaleName();
-
         $rating = $merchantReviewRequestTransfer->getRating();
         if ($rating < MerchantReviewConfig::MERCHANT_REVIEW_MINIMUM_RATING || $rating > MerchantReviewConfig::MERCHANT_REVIEW_MAXIMUM_RATING) {
             throw new RatingOutOfRangeException(sprintf(

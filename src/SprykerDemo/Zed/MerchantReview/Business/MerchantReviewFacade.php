@@ -9,6 +9,8 @@ namespace SprykerDemo\Zed\MerchantReview\Business;
 
 use Generated\Shared\Transfer\MerchantReviewCollectionTransfer;
 use Generated\Shared\Transfer\MerchantReviewCriteriaTransfer;
+use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
+use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -24,14 +26,14 @@ class MerchantReviewFacade extends AbstractFacade implements MerchantReviewFacad
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\MerchantReviewTransfer $merchantReviewTransfer
+     * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\MerchantReviewTransfer
+     * @return \Generated\Shared\Transfer\MerchantReviewResponseTransfer
      */
     public function createMerchantReview(
-        MerchantReviewTransfer $merchantReviewTransfer
-    ): MerchantReviewTransfer {
-        return $this->getEntityManager()->createMerchantReview($merchantReviewTransfer);
+        MerchantReviewRequestTransfer $merchantReviewRequestTransfer
+    ): MerchantReviewResponseTransfer {
+        return $this->getFactory()->createMerchantReviewCreator()->createMerchantReview($merchantReviewRequestTransfer);
     }
 
     /**
@@ -61,9 +63,7 @@ class MerchantReviewFacade extends AbstractFacade implements MerchantReviewFacad
     public function updateMerchantReviewStatus(
         MerchantReviewTransfer $merchantReviewTransfer
     ): void {
-        $this->getFactory()
-            ->createMerchantReviewStatusUpdater()
-            ->updateMerchantReviewStatus($merchantReviewTransfer);
+        $this->getEntityManager()->updateMerchantReviewStatus($merchantReviewTransfer);
     }
 
     /**

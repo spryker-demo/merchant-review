@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerDemo\Zed\MerchantReview\Communication\Controller\Mapper;
+namespace SprykerDemo\Zed\MerchantReview\Business\Mapper;
 
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 
-class CustomerReviewSubmitMapper implements CustomerReviewSubmitMapperInterface
+class MerchantReviewRequestMapper implements MerchantReviewRequestMapperInterface
 {
     /**
      * @var \Spryker\Zed\Locale\Business\LocaleFacadeInterface
@@ -28,19 +28,18 @@ class CustomerReviewSubmitMapper implements CustomerReviewSubmitMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
+     * @param \Generated\Shared\Transfer\MerchantReviewTransfer $merchantReviewTransfer
      *
      * @return \Generated\Shared\Transfer\MerchantReviewTransfer
      */
-    public function mapRequestTransfer(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): MerchantReviewTransfer
-    {
-        $merchantReviewTransfer = new MerchantReviewTransfer();
-
-        $merchantReviewTransfer
+    public function mapRequestTransfer(
+        MerchantReviewRequestTransfer $merchantReviewRequestTransfer,
+        MerchantReviewTransfer $merchantReviewTransfer
+    ): MerchantReviewTransfer {
+        return $merchantReviewTransfer
             ->fromArray($merchantReviewRequestTransfer->modifiedToArray(), true)
-            ->setFkMerchant($merchantReviewRequestTransfer->getIdMerchant())
+            ->setFkMerchant($merchantReviewRequestTransfer->getIdMerchantOrFail())
             ->setFkLocale($this->findIdLocale($merchantReviewRequestTransfer->getLocaleNameOrFail()));
-
-        return $merchantReviewTransfer;
     }
 
     /**

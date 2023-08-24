@@ -10,9 +10,6 @@ namespace SprykerDemo\Zed\MerchantReview;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
-/**
- * @method \SprykerDemo\Zed\MerchantReview\MerchantReviewConfig getConfig()
- */
 class MerchantReviewDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -32,7 +29,7 @@ class MerchantReviewDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
-        $container = $this->addMerchantFacade($container);
+        $container = $this->addLocaleFacade($container);
 
         return $container;
     }
