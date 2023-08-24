@@ -7,12 +7,9 @@
 
 namespace SprykerDemo\Zed\MerchantReview\Communication\Controller;
 
-use Generated\Shared\Transfer\MerchantReviewErrorTransfer;
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
 use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
-use Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
-use SprykerDemo\Shared\MerchantReview\Exception\RatingOutOfRangeException;
 
 /**
  * @method \SprykerDemo\Zed\MerchantReview\Business\MerchantReviewFacadeInterface getFacade()
