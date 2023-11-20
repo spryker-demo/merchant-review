@@ -59,7 +59,7 @@ class MerchantReviewMapper
     ): SpyMerchantReview {
         return $merchantReviewEntity
             ->fromArray($merchantReviewTransfer->toArray())
-            ->setFkMerchant($merchantReviewTransfer->getIdMerchant())
-            ->setFkLocale($merchantReviewTransfer->getIdLocale());
+            ->setFkMerchant($merchantReviewTransfer->getIdMerchantOrFail())
+            ->setFkLocale($merchantReviewTransfer->getIdLocaleOrFail());
     }
 }
