@@ -24,23 +24,27 @@ class MerchantReviewMapper
         SpyMerchantReview $merchantReviewEntity,
         MerchantReviewTransfer $merchantReviewTransfer
     ): MerchantReviewTransfer {
-        return $merchantReviewTransfer->fromArray($merchantReviewEntity->toArray(), true);
+        return $merchantReviewTransfer
+            ->fromArray($merchantReviewEntity->toArray(), true)
+            ->setIdLocale($merchantReviewEntity->getFkLocale())
+            ->setIdMerchant($merchantReviewEntity->getFkMerchant());
     }
 
     /**
      * @param \Propel\Runtime\Collection\ObjectCollection $merchantReviewEntities
+     * @param \Generated\Shared\Transfer\MerchantReviewCollectionTransfer $merchantReviewCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function mapMerchantReviewEntitiesToMerchantReviewCollection(ObjectCollection $merchantReviewEntities): MerchantReviewCollectionTransfer
-    {
-        $merchantReviewsCollectionTransfer = new MerchantReviewCollectionTransfer();
-
+    public function mapMerchantReviewEntitiesToMerchantReviewCollection(
+        ObjectCollection $merchantReviewEntities,
+        MerchantReviewCollectionTransfer $merchantReviewCollectionTransfer
+    ): MerchantReviewCollectionTransfer {
         foreach ($merchantReviewEntities as $merchantReviewEntity) {
-            $merchantReviewsCollectionTransfer->addMerchantReview($this->mapMerchantReviewEntityToMerchantReviewTransfer($merchantReviewEntity, new MerchantReviewTransfer()));
+            $merchantReviewCollectionTransfer->addMerchantReview($this->mapMerchantReviewEntityToMerchantReviewTransfer($merchantReviewEntity, new MerchantReviewTransfer()));
         }
 
-        return $merchantReviewsCollectionTransfer;
+        return $merchantReviewCollectionTransfer;
     }
 
     /**
@@ -53,6 +57,9 @@ class MerchantReviewMapper
         MerchantReviewTransfer $merchantReviewTransfer,
         SpyMerchantReview $merchantReviewEntity
     ): SpyMerchantReview {
-        return $merchantReviewEntity->fromArray($merchantReviewTransfer->toArray());
+        return $merchantReviewEntity
+            ->fromArray($merchantReviewTransfer->toArray())
+            ->setFkMerchant($merchantReviewTransfer->getIdMerchant())
+            ->setFkLocale($merchantReviewTransfer->getIdLocale());
     }
 }

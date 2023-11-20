@@ -18,7 +18,7 @@ interface MerchantReviewFacadeInterface
     /**
      * Specification:
      *    - Stores provided merchant review in persistent storage with pending status.
-     *    - Checks if provided rating in transfer object does not exceed configured limit
+     *    - Checks if provided rating in transfer object does not exceed configured limit.
      *    - Returns the provided transfer object updated with the stored entity's data.
      *
      * @api
@@ -33,7 +33,7 @@ interface MerchantReviewFacadeInterface
 
     /**
      * Specification:
-     * - Retrieves the merchant review from persistent storage that matches the provided id in the transfer object.
+     * - Finds the merchant review from persistent storage by provided id.
      *
      * @api
      *
@@ -61,8 +61,7 @@ interface MerchantReviewFacadeInterface
 
     /**
      * Specification:
-     * - Permanently deletes the merchant review from persistent storage that matches the provided id in the transfer
-     * object.
+     * - Permanently deletes the merchant review from persistent storage that matches the provided id.
      *
      * @api
      *
@@ -70,7 +69,7 @@ interface MerchantReviewFacadeInterface
      *
      * @return void
      */
-    public function deleteMerchantReview(int $idMerchantReview): void;
+    public function deleteMerchantReviewById(int $idMerchantReview): void;
 
     /**
      * Specification:
@@ -78,9 +77,9 @@ interface MerchantReviewFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteriaTransfer
      *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer;
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteriaTransfer): MerchantReviewCollectionTransfer;
 }

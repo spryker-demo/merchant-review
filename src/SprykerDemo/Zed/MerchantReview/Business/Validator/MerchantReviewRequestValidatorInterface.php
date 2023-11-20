@@ -8,15 +8,14 @@
 namespace SprykerDemo\Zed\MerchantReview\Business\Validator;
 
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
+use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
 
 interface MerchantReviewRequestValidatorInterface
 {
     /**
      * @param \Generated\Shared\Transfer\MerchantReviewRequestTransfer $merchantReviewRequestTransfer
      *
-     * @throws \SprykerDemo\Shared\MerchantReview\Exception\RatingOutOfRangeException
-     *
-     * @return void
+     * @return \Generated\Shared\Transfer\MerchantReviewResponseTransfer
      */
-    public function validate(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): void;
+    public function validate(MerchantReviewRequestTransfer $merchantReviewRequestTransfer): MerchantReviewResponseTransfer;
 }

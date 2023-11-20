@@ -24,11 +24,11 @@ interface MerchantReviewRepositoryInterface
     public function findMerchantReviewById(int $idMerchantReview): ?MerchantReviewTransfer;
 
     /**
-     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteriaTransfer
      *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer;
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteriaTransfer): MerchantReviewCollectionTransfer;
 
     /**
      * @param array<int> $merchantReviewIds

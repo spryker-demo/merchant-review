@@ -3,8 +3,8 @@
 
     <transfer name="MerchantReview">
         <property name="idMerchantReview" type="int"/>
-        <property name="fkMerchant" type="int"/>
-        <property name="fkLocale" type="int"/>
+        <property name="idMerchant" type="int"/>
+        <property name="idLocale" type="int"/>
         <property name="customerReference" type="string"/>
         <property name="rating" type="int"/>
         <property name="summary" type="string"/>

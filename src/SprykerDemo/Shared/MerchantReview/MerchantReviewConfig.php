@@ -30,17 +30,4 @@ class MerchantReviewConfig extends AbstractBundleConfig
      * @var int
      */
     public const MERCHANT_REVIEW_MINIMUM_RATING = 1;
-
-    /**
-     * Specification:
-     * - Retrieves the available maximum rating value
-     *
-     * @api
-     *
-     * @return int
-     */
-    public function getMaximumRating(): int
-    {
-        return static::MERCHANT_REVIEW_MAXIMUM_RATING;
-    }
 }

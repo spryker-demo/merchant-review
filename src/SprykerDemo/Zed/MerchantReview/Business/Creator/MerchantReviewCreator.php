@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\MerchantReviewErrorTransfer;
 use Generated\Shared\Transfer\MerchantReviewRequestTransfer;
 use Generated\Shared\Transfer\MerchantReviewResponseTransfer;
 use Generated\Shared\Transfer\MerchantReviewTransfer;
-use SprykerDemo\Shared\MerchantReview\Exception\RatingOutOfRangeException;
 use SprykerDemo\Zed\MerchantReview\Business\Mapper\MerchantReviewRequestMapperInterface;
 use SprykerDemo\Zed\MerchantReview\Business\Validator\MerchantReviewRequestValidatorInterface;
 use SprykerDemo\Zed\MerchantReview\Persistence\MerchantReviewEntityManagerInterface;
@@ -64,14 +63,15 @@ class MerchantReviewCreator implements MerchantReviewCreatorInterface
         $merchantReviewResponseTransfer = (new MerchantReviewResponseTransfer())->setIsSuccess(true);
 
         try {
-            $this->merchantReviewRequestValidator->validate($merchantReviewRequestTransfer);
+            $merchantReviewResponseTransfer = $this->merchantReviewRequestValidator->validate($merchantReviewRequestTransfer);
+
+            if ($merchantReviewResponseTransfer->getIsSuccess() !== true) {
+                return $merchantReviewResponseTransfer;
+            }
+
             $this->merchantReviewEntityManager->createMerchantReview(
                 $this->merchantReviewRequestMapper->mapRequestTransfer($merchantReviewRequestTransfer, new MerchantReviewTransfer()),
             );
-        } catch (RatingOutOfRangeException $outOfRangeException) {
-            return $merchantReviewResponseTransfer
-                ->setIsSuccess(false)
-                ->addError((new MerchantReviewErrorTransfer())->setMessage($outOfRangeException->getMessage()));
         } catch (Throwable $exception) {
             return $merchantReviewResponseTransfer
                 ->setIsSuccess(false)

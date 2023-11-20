@@ -41,26 +41,26 @@ class MerchantReviewRepository extends AbstractRepository implements MerchantRev
     }
 
     /**
-     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteria
+     * @param \Generated\Shared\Transfer\MerchantReviewCriteriaTransfer $merchantReviewCriteriaTransfer
      *
      * @return \Generated\Shared\Transfer\MerchantReviewCollectionTransfer
      */
-    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteria): MerchantReviewCollectionTransfer
+    public function getMerchantReviews(MerchantReviewCriteriaTransfer $merchantReviewCriteriaTransfer): MerchantReviewCollectionTransfer
     {
         $merchantReviewQuery = $this->getFactory()
             ->createMerchantReviewQuery();
 
-        if ($merchantReviewCriteria->getMerchantReviewIds()) {
-            $merchantReviewQuery->filterByIdMerchantReview_In($merchantReviewCriteria->getMerchantReviewIds());
+        if ($merchantReviewCriteriaTransfer->getMerchantReviewIds()) {
+            $merchantReviewQuery->filterByIdMerchantReview_In($merchantReviewCriteriaTransfer->getMerchantReviewIds());
         }
 
-        if ($merchantReviewCriteria->getFilter()) {
-            $merchantReviewQuery = $this->applyFilter($merchantReviewCriteria->getFilter(), $merchantReviewQuery);
+        if ($merchantReviewCriteriaTransfer->getFilter()) {
+            $merchantReviewQuery = $this->applyFilter($merchantReviewCriteriaTransfer->getFilter(), $merchantReviewQuery);
         }
 
         return $this->getFactory()
             ->createMerchantReviewMapper()
-            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewQuery->find());
+            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewQuery->find(), new MerchantReviewCollectionTransfer());
     }
 
     /**
@@ -77,7 +77,7 @@ class MerchantReviewRepository extends AbstractRepository implements MerchantRev
 
         return $this->getFactory()
             ->createMerchantReviewMapper()
-            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewEntities);
+            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewEntities, new MerchantReviewCollectionTransfer());
     }
 
     /**

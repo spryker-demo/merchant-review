@@ -38,8 +38,7 @@ class MerchantReviewRequestMapper implements MerchantReviewRequestMapperInterfac
     ): MerchantReviewTransfer {
         return $merchantReviewTransfer
             ->fromArray($merchantReviewRequestTransfer->modifiedToArray(), true)
-            ->setFkMerchant($merchantReviewRequestTransfer->getIdMerchantOrFail())
-            ->setFkLocale($this->findIdLocale($merchantReviewRequestTransfer->getLocaleNameOrFail()));
+            ->setIdLocale($this->findIdLocale($merchantReviewRequestTransfer->getLocaleNameOrFail()));
     }
 
     /**
