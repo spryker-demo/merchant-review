@@ -17,9 +17,9 @@ interface MerchantReviewFacadeInterface
 {
     /**
      * Specification:
-     *    - Stores provided merchant review in persistent storage with pending status.
-     *    - Checks if provided rating in transfer object does not exceed configured limit.
-     *    - Returns the provided transfer object updated with the stored entity's data.
+     * - Stores provided merchant review in persistent storage with pending status.
+     * - Checks if provided rating in transfer object does not exceed configured limit.
+     * - Returns the provided transfer object updated with the stored entity's data.
      *
      * @api
      *
