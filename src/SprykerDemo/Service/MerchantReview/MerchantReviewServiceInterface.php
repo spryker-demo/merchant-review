@@ -16,7 +16,7 @@ interface MerchantReviewServiceInterface
      * Specification:
      * - Calculates the merchant review rating aggregation value.
      * - Calculates the merchant review average rating value.
-     * - Calculates the merchant total review value.
+     * - Calculates the merchant total reviews number.
      * - Provides the merchant review available maximum rating value.
      * - Requires `MerchantReviewSummaryTransfer.ratingAggregation` property to calculate merchant review summary.
      *

@@ -16,7 +16,7 @@
     </transfer>
 
     <transfer name="MerchantReviewCriteria">
-        <property name="merchantReviewIds" type="int[]"/>
+        <property name="merchantReviewIds" type="int[]" singular="merchantReviewId"/>
         <property name="filter" type="Filter"/>
     </transfer>
 
@@ -55,7 +55,7 @@
     <transfer name="MerchantReviewSummary">
         <property name="maximumRating" type="int"/>
         <property name="averageRating" type="float"/>
-        <property name="totalReview" type="int"/>
+        <property name="totalReviews" type="int"/>
         <property name="ratingAggregation" type="int[]" singular="ratingAggregation"/>
     </transfer>
 

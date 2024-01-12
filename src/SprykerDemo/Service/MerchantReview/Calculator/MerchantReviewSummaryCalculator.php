@@ -25,16 +25,14 @@ class MerchantReviewSummaryCalculator implements MerchantReviewSummaryCalculator
      */
     public function calculate(RatingAggregationTransfer $ratingAggregationTransfer): MerchantReviewSummaryTransfer
     {
-        $ratingAggregationTransfer->requireRatingAggregation();
-
         $ratingAggregation = $ratingAggregationTransfer->getRatingAggregation();
-        $totalReview = $this->getTotalReview($ratingAggregation);
+        $totalReviews = $this->getTotalReviews($ratingAggregation);
 
         return (new MerchantReviewSummaryTransfer())
             ->setRatingAggregation($this->formatRatingAggregation($ratingAggregation))
             ->setMaximumRating(MerchantReviewConfig::MERCHANT_REVIEW_MAXIMUM_RATING)
-            ->setAverageRating($this->getAverageRating($ratingAggregation, $totalReview))
-            ->setTotalReview($totalReview);
+            ->setAverageRating($this->getAverageRating($ratingAggregation, $totalReviews))
+            ->setTotalReviews($totalReviews);
     }
 
     /**
@@ -98,7 +96,7 @@ class MerchantReviewSummaryCalculator implements MerchantReviewSummaryCalculator
      *
      * @return int
      */
-    protected function getTotalReview(array $ratingAggregation): int
+    protected function getTotalReviews(array $ratingAggregation): int
     {
         return array_sum($ratingAggregation);
     }
