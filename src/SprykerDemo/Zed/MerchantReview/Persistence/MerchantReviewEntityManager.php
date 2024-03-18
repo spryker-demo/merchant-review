@@ -42,11 +42,14 @@ class MerchantReviewEntityManager extends AbstractEntityManager implements Merch
      */
     public function deleteMerchantReviewById(int $idMerchantReview): void
     {
-        $this->getFactory()
+        $merchantReviewEntity = $this->getFactory()
             ->createMerchantReviewQuery()
             ->filterByIdMerchantReview($idMerchantReview)
-            ->findOne()
-            ->delete();
+            ->findOne();
+
+        if ($merchantReviewEntity) {
+            $merchantReviewEntity->delete();
+        }
     }
 
     /**

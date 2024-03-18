@@ -58,9 +58,12 @@ class MerchantReviewRepository extends AbstractRepository implements MerchantRev
             $merchantReviewQuery = $this->applyFilter($merchantReviewCriteriaTransfer->getFilter(), $merchantReviewQuery);
         }
 
+        /** @var \Propel\Runtime\Collection\ObjectCollection $merchantReviewEntities */
+        $merchantReviewEntities = $merchantReviewQuery->find();
+
         return $this->getFactory()
             ->createMerchantReviewMapper()
-            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewQuery->find(), new MerchantReviewCollectionTransfer());
+            ->mapMerchantReviewEntitiesToMerchantReviewCollection($merchantReviewEntities, new MerchantReviewCollectionTransfer());
     }
 
     /**
@@ -70,6 +73,7 @@ class MerchantReviewRepository extends AbstractRepository implements MerchantRev
      */
     public function getMerchantReviewsByIds(array $merchantReviewIds): MerchantReviewCollectionTransfer
     {
+        /** @var \Propel\Runtime\Collection\ObjectCollection $merchantReviewEntities */
         $merchantReviewEntities = $this->getFactory()
             ->createMerchantReviewQuery()
             ->filterByIdMerchantReview_In($merchantReviewIds)
